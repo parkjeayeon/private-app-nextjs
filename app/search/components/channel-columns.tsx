@@ -36,7 +36,10 @@ export const CHANNELS_COLUMNS: ColumnDef<IChannel>[] = [
     maxSize: 220,
     minSize: 170,
     cell: ({ row }) => (
-      <div className="flex items-center gap-2 py-2 text-xs">
+      <div
+        className="flex items-center gap-2 py-2 text-xs"
+        onClick={() => window.open(row.original.link, '_blank')}
+      >
         <Avatar className="h-6 w-6">
           <AvatarImage src={row.original.thumbnailUrl ?? ''} />
           <AvatarFallback>CN</AvatarFallback>
@@ -56,13 +59,7 @@ export const CHANNELS_COLUMNS: ColumnDef<IChannel>[] = [
     accessorKey: 'regionCode',
     header: '국가',
     maxSize: 50,
-    cell: ({ row }) => (
-      <p className="text-xs">
-        {row.original.regionCode === ''
-          ? '-'
-          : (countriesMap[row.original.regionCode] ?? 'other')}
-      </p>
-    ),
+    cell: ({ row }) => <p className="text-xs">{row.original.regionCode}</p>,
   },
   {
     accessorKey: 'subscriberCount',
